@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/ProxmoxProvisioner.Cli/ProxmoxProvisioner.Cli.csproj" />
+    <Project Path="src/ProxmoxProvisioner/ProxmoxProvisioner.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/ProxmoxProvisioner.Tests/ProxmoxProvisioner.Tests.csproj" />
+  </Folder>
+</Solution>
