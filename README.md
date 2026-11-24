@@ -8,7 +8,7 @@ Creates a ready-to-use VPS on Proxmox VE from a cloud-init template, through the
 4. grow the boot disk
 5. start the VM and wait for every Proxmox task to finish
 
-If any step after the clone fails, the half-built VM is destroyed, so a retry starts clean and you don't end up with orphaned disks.
+If any step after the clone fails, the half-built VM is destroyed, so a retry starts clean and you don't end up with orphaned disks. A Proxmox task that hangs (locked storage, busy node) counts as a failure after 15 minutes instead of blocking forever.
 
 Written in C# (.NET 10) with no NuGet dependencies outside the test project. It pairs with [proxmox-cloudinit-templates](https://github.com/Ahmad-SDev/proxmox-cloudinit-templates), which builds the templates.
 

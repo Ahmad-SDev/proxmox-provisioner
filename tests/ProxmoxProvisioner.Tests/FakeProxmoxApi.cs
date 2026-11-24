@@ -13,6 +13,9 @@ internal sealed class FakeProxmoxApi : IProxmoxApi
 
     public string? FailingTaskType { get; set; }
 
+    /// <summary>Tasks of this type report "running" forever.</summary>
+    public string? HangingTaskType { get; set; }
+
     public bool ResizeIsSynchronous { get; set; }
 
     public Task<int> GetNextVmIdAsync(CancellationToken cancellationToken) => Task.FromResult(105);
@@ -46,8 +49,8 @@ internal sealed class FakeProxmoxApi : IProxmoxApi
     {
         Calls.Add(call);
         var upid = $"UPID:{node}:{Calls.Count}:{taskType}:";
-        _taskResults[upid] = taskType == FailingTaskType
-            ? new ProxmoxTaskStatus(IsRunning: false, ExitStatus: "storage full")
+        _taskResults[upid] = taskType == HangingTaskType ? new ProxmoxTaskStatus(IsRunning: true, ExitStatus: null)
+            : taskType == FailingTaskType ? new ProxmoxTaskStatus(IsRunning: false, ExitStatus: "storage full")
             : new ProxmoxTaskStatus(IsRunning: false, ExitStatus: "OK");
         return Task.FromResult(new ProxmoxTask(node, upid));
     }
